@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "target": "es2017",
+    "moduleResolution": "node",
+    "lib": ["dom", "es2017", "dom.iterable", "esnext.asynciterable"],
+    "jsx": "react",
+    "strict": true,
+    "experimentalDecorators": true,
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["./templates"]
+}
