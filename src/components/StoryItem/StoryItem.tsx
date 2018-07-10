@@ -1,9 +1,9 @@
 import React, { Component, SFC } from "react";
 import formatDistance from "date-fns/formatDistance";
 
-import { Link } from "App.style";
-import { StorySubscription, STORY_DETAILS, Story } from "./StoryItem.data";
+import { Link, A } from "App.style";
 import { Site, Subtext, Title } from "./StoryItem.style";
+import Item, { ItemData } from "components/Item";
 
 const HN = "https://news.ycombinator.com";
 const ALGOLIA = "https://hn.algolia.com/?sort=byDate&storyText=false";
@@ -11,24 +11,23 @@ const GOOGLE = "https://www.google.com/search";
 
 const SITE_REGEX = /.+\/\/(?:www\.)?([^\/]+)/;
 
-export interface Props extends Story {}
+export interface Props extends ItemData {}
 
 export class StoryItem extends Component<Props> {
   render() {
     const { title, by, id, score, url } = this.props;
-    const site = "example.com";
     return (
       <div>
         <Title>
-          <Link href={url}>{title} </Link>
+          <A href={url}>{title} </A>
           {this.renderSite()}
         </Title>
         <Subtext>
-          {score} points by <Link href={`${HN}/user?id=${by}`}>{by}</Link>
+          {score} points by <A href={`${HN}/user?id=${by}`}>{by}</A>
           {this.timeAgo()}
-          |<Link href={`${ALGOLIA}&query=${title}`}> past </Link>
-          |<Link href={`${GOOGLE}?q=${title}`}> web </Link>
-          |<Link href={`${HN}/item?id=${id}`}> {this.commentsLinkText()} </Link>
+          |<A href={`${ALGOLIA}&query=${title}`}> past </A>
+          |<A href={`${GOOGLE}?q=${title}`}> web </A>
+          |<Link to={`/item/${id}`}> {this.commentsLinkText()} </Link>
         </Subtext>
       </div>
     );
@@ -63,24 +62,14 @@ export class StoryItem extends Component<Props> {
 
     return (
       <Site>
-        (<Link href={`${HN}/from?site=${site}`}>{site}</Link>)
+        (<A href={`${HN}/from?site=${site}`}>{site}</A>)
       </Site>
     );
   }
 }
 
 const StoryItemContainer: SFC<{ id: number }> = ({ id }) => (
-  <StorySubscription subscription={STORY_DETAILS} variables={{ ref: `/v0/item/${id}` }}>
-    {({ loading, error, data }) => {
-      if (error) {
-        return `Boom! ${error.message}`;
-      }
-      if (loading || !data) {
-        return "Loading...";
-      }
-      return <StoryItem {...data.story} />;
-    }}
-  </StorySubscription>
+  <Item id={id}>{data => <StoryItem {...data} />}</Item>
 );
 
 export default StoryItemContainer;

@@ -1,7 +1,7 @@
 import React, { Component, SFC } from "react";
 
 import StoryItem from "components/StoryItem";
-import { Stories, STORIES } from "./StoryList.data";
+import { StoriesQuery, STORIES } from "./StoryList.data";
 import { List, ListItem } from "./StoryList.style";
 
 export interface Props {
@@ -24,7 +24,7 @@ export class StoryList extends React.Component<Props> {
 }
 
 const StoryListContainer: SFC = () => (
-  <Stories subscription={STORIES} variables={{ ref: "/v0/topstories" }}>
+  <StoriesQuery query={STORIES} variables={{ ref: "/v0/topstories" }}>
     {({ loading, error, data }) => {
       if (error) {
         return `Boom! ${error.message}`;
@@ -34,7 +34,7 @@ const StoryListContainer: SFC = () => (
       }
       return <StoryList items={data.stories.map(story => story.id)} />;
     }}
-  </Stories>
+  </StoriesQuery>
 );
 
 export default StoryListContainer;

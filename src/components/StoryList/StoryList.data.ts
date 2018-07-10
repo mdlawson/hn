@@ -1,15 +1,15 @@
-import { Query, Subscription } from "react-apollo";
+import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 export const STORIES = gql`
-  subscription listStories($ref: String!) {
-    stories @rtdbSub(ref: $ref, type: $ref, limitToFirst: 30, event: "value") @array {
+  query listStories($ref: String!) {
+    stories @rtdbQuery(ref: $ref, type: $ref, limitToFirst: 30) @array {
       id @val
     }
   }
 `;
 
-export class Stories extends Subscription<
+export class StoriesQuery extends Query<
   {
     stories: Array<{ id: number }>;
   },

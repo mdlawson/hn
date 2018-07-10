@@ -1,4 +1,5 @@
 import styled, { css } from "react-emotion";
+import { Link as RouterLink } from "react-router-dom";
 
 export const GREY = "#828282";
 export const BG = "#f6f6ef";
@@ -9,6 +10,8 @@ export const Container = styled.div`
   width: 85%;
   margin: 0 auto;
   background-color: ${BG};
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Header = styled.div`
@@ -30,7 +33,7 @@ export const Title = styled.div`
   margin-right: 8px;
 `;
 
-export const Link = styled.a`
+export const A = styled.a`
   color: black;
   text-decoration: none;
 
@@ -39,10 +42,12 @@ export const Link = styled.a`
   }
 `;
 
+export const Link = A.withComponent(RouterLink);
+
 export const subdued = css`
   color: ${GREY};
 
-  ${Link} {
+  ${A}, ${Link} {
     color: ${GREY};
   }
 `;
