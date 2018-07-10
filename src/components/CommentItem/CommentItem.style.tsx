@@ -10,5 +10,4 @@ export const Header = styled.div`
 
 export const Content = styled.div`
   font-size: 9pt;
-  margin-bottom: 8px;
 `;
