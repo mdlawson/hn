@@ -5135,6 +5135,14 @@ internal-ip@1.2.0:
   dependencies:
     meow "^3.3.0"
 
+interweave@^9.0.0-4:
+  version "9.0.0-4"
+  resolved "https://registry.yarnpkg.com/interweave/-/interweave-9.0.0-4.tgz#b7d0b07e1f3a3a720b754e75746c3df0e1031a56"
+  dependencies:
+    "@types/prop-types" "^15.5.3"
+    "@types/react" "^16.4.6"
+    prop-types "^15.6.2"
+
 invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
@@ -7462,7 +7470,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:

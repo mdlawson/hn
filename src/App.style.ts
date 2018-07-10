@@ -28,16 +28,19 @@ export const Icon = styled.img`
   margin-right: 5px;
 `;
 
-export const A = styled.a`
+export const External = styled.a`
   color: black;
-  text-decoration: none;
 
   &:visited {
     color: ${GREY};
   }
 `;
 
-export const Link = A.withComponent(RouterLink);
+export const Internal = styled(External)`
+  text-decoration: none;
+`;
+
+export const Link = Internal.withComponent(RouterLink);
 
 export const Title = styled.div`
   font-weight: bold;
@@ -51,7 +54,11 @@ export const Title = styled.div`
 export const subdued = css`
   color: ${GREY};
 
-  ${A}, ${Link} {
+  ${Internal}, ${Link} {
     color: ${GREY};
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;

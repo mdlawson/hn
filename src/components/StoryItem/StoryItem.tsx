@@ -1,6 +1,6 @@
 import React, { Component, SFC } from "react";
 
-import { Link, A } from "App.style";
+import { Link, Internal } from "App.style";
 import { Site, Subtext, Title } from "./StoryItem.style";
 import Item, { ItemData } from "components/Item";
 import Author from "components/Author";
@@ -20,15 +20,17 @@ export class StoryItem extends Component<Props> {
     return (
       <div>
         <Title>
-          <A href={url}>{title} </A>
+          <Internal href={url}>{title} </Internal>
           {this.renderSite()}
         </Title>
         <Subtext>
-          {score} points by <Author id={by} />
-          <Time since={time} />
-          |<A href={`${ALGOLIA}&query=${title}`}> past </A>
-          |<A href={`${GOOGLE}?q=${title}`}> web </A>
-          |<Link to={`/item/${id}`}> {this.commentsLinkText()} </Link>
+          {score} points by <Author id={by} /> <Time since={time} />
+          {" | "}
+          <Internal href={`${ALGOLIA}&query=${title}`}>past</Internal>
+          {" | "}
+          <Internal href={`${GOOGLE}?q=${title}`}>web</Internal>
+          {" | "}
+          <Link to={`/item/${id}`}>{this.commentsLinkText()}</Link>
         </Subtext>
       </div>
     );
@@ -58,7 +60,7 @@ export class StoryItem extends Component<Props> {
 
     return (
       <Site>
-        (<A href={`${HN}/from?site=${site}`}>{site}</A>)
+        (<Internal href={`${HN}/from?site=${site}`}>{site}</Internal>)
       </Site>
     );
   }

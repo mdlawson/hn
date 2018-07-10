@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router";
 import { hot } from "react-hot-loader";
 
-import { Container, Header, Icon, Title, A, Link } from "App.style";
+import { Container, Header, Icon, Title, Internal, Link } from "App.style";
 import StoryList from "components/StoryList";
 import StoryDetail from "components/StoryDetail";
 
@@ -18,12 +18,12 @@ class App extends Component {
             <Link to="/">Hacker News</Link>
           </Title>
           <span>
-            <A href={`${HN}/newest`}> new </A>
-            |<A href={`${HN}/newcomments}`}> comments </A>
-            |<A href={`${HN}/show`}> show </A>
-            |<A href={`${HN}/ask`}> ask </A>
-            |<A href={`${HN}/jobs`}> jobs </A>
-            |<A href={`${HN}/submit`}> submit </A>
+            <Internal href={`${HN}/newest`}> new </Internal>
+            |<Internal href={`${HN}/newcomments}`}> comments </Internal>
+            |<Internal href={`${HN}/show`}> show </Internal>
+            |<Internal href={`${HN}/ask`}> ask </Internal>
+            |<Internal href={`${HN}/jobs`}> jobs </Internal>
+            |<Internal href={`${HN}/submit`}> submit </Internal>
           </span>
         </Header>
         <Switch>
