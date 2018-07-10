@@ -17,7 +17,8 @@ export const ListItem = styled.li`
   flex: 1;
 
   &::before {
-    ${subdued} content: counter(ListItem) ".";
+    ${subdued};
+    content: counter(ListItem) ".";
     text-align: right;
     width: 30px;
     font-size: 10pt;

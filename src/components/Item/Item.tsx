@@ -4,11 +4,17 @@ import { ItemQuery, ITEM } from "./Item.data";
 
 export interface ItemData {
   id: number;
-  title: string;
+  deleted: boolean;
+  type: string;
   by: string;
   time: number;
+  text: string;
+  dead: boolean;
+  parent: number;
+  kids: number[];
   url: string;
   score: number;
+  title: string;
   descendants: number;
 }
 

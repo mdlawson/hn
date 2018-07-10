@@ -7,11 +7,17 @@ export const ITEM = gql`
   query queryItem($ref: String!) {
     item @rtdbQuery(ref: $ref, type: "item") {
       id @key
-      title
+      deleted
+      type
       by
       time
+      text
+      dead
+      parent
+      kids @array
       url
       score
+      title
       descendants
     }
   }

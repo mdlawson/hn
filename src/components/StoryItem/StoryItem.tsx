@@ -1,9 +1,10 @@
 import React, { Component, SFC } from "react";
-import formatDistance from "date-fns/formatDistance";
 
 import { Link, A } from "App.style";
 import { Site, Subtext, Title } from "./StoryItem.style";
 import Item, { ItemData } from "components/Item";
+import Author from "components/Author";
+import Time from "components/Time";
 
 const HN = "https://news.ycombinator.com";
 const ALGOLIA = "https://hn.algolia.com/?sort=byDate&storyText=false";
@@ -15,7 +16,7 @@ export interface Props extends ItemData {}
 
 export class StoryItem extends Component<Props> {
   render() {
-    const { title, by, id, score, url } = this.props;
+    const { title, by, id, score, url, time } = this.props;
     return (
       <div>
         <Title>
@@ -23,8 +24,8 @@ export class StoryItem extends Component<Props> {
           {this.renderSite()}
         </Title>
         <Subtext>
-          {score} points by <A href={`${HN}/user?id=${by}`}>{by}</A>
-          {this.timeAgo()}
+          {score} points by <Author id={by} />
+          <Time since={time} />
           |<A href={`${ALGOLIA}&query=${title}`}> past </A>
           |<A href={`${GOOGLE}?q=${title}`}> web </A>
           |<Link to={`/item/${id}`}> {this.commentsLinkText()} </Link>
@@ -43,11 +44,6 @@ export class StoryItem extends Component<Props> {
       default:
         return `${descendants} comments`;
     }
-  }
-
-  timeAgo() {
-    const { time } = this.props;
-    return formatDistance(time * 1000, new Date(), { addSuffix: true }) + " ";
   }
 
   renderSite() {

@@ -25,12 +25,7 @@ export const Header = styled.div`
 
 export const Icon = styled.img`
   border: 1px solid white;
-  margin-right: 4px;
-`;
-
-export const Title = styled.div`
-  font-weight: bold;
-  margin-right: 8px;
+  margin-right: 5px;
 `;
 
 export const A = styled.a`
@@ -43,6 +38,15 @@ export const A = styled.a`
 `;
 
 export const Link = A.withComponent(RouterLink);
+
+export const Title = styled.div`
+  font-weight: bold;
+  margin-right: 8px;
+
+  ${Link}:visited {
+    color: black;
+  }
+`;
 
 export const subdued = css`
   color: ${GREY};

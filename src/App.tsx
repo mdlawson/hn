@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router";
 import { hot } from "react-hot-loader";
 
-import { Container, Header, Icon, Title, A } from "App.style";
+import { Container, Header, Icon, Title, A, Link } from "App.style";
 import StoryList from "components/StoryList";
 import StoryDetail from "components/StoryDetail";
 
@@ -14,7 +14,9 @@ class App extends Component {
       <Container>
         <Header>
           <Icon src="https://news.ycombinator.com/y18.gif" />
-          <Title>Hacker News</Title>
+          <Title>
+            <Link to="/">Hacker News</Link>
+          </Title>
           <span>
             <A href={`${HN}/newest`}> new </A>
             |<A href={`${HN}/newcomments}`}> comments </A>
