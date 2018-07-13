@@ -1,5 +1,5 @@
-import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import { createQuery } from "apollo/utils";
 
 export const STORIES = gql`
   query listStories($ref: String!) {
@@ -9,11 +9,7 @@ export const STORIES = gql`
   }
 `;
 
-export class StoriesQuery extends Query<
-  {
-    stories: Array<{ id: number }>;
-  },
-  {
-    ref: string;
-  }
-> {}
+export const StoriesQuery = createQuery<
+  { stories: Array<{ id: number }> },
+  { ref: string }
+>(STORIES, () => ({ ref: `/v0/topstories` }));

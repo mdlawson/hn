@@ -24,7 +24,7 @@ export class StoryList extends React.Component<Props> {
 }
 
 const StoryListContainer: SFC = () => (
-  <StoriesQuery query={STORIES} variables={{ ref: "/v0/topstories" }}>
+  <StoriesQuery>
     {({ loading, error, data }) => {
       if (error) {
         return `Boom! ${error.message}`;

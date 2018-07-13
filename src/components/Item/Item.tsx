@@ -1,6 +1,6 @@
 import React, { SFC, ReactNode } from "react";
 
-import { ItemQuery, ITEM } from "./Item.data";
+import { ItemQuery } from "./Item.data";
 
 export interface ItemData {
   id: number;
@@ -16,6 +16,7 @@ export interface ItemData {
   score: number;
   title: string;
   descendants: number;
+  collapsed: boolean;
 }
 
 interface Props {
@@ -24,7 +25,7 @@ interface Props {
 }
 
 const ItemContainer: SFC<Props> = ({ id, children }) => (
-  <ItemQuery query={ITEM} variables={{ ref: `/v0/item/${id}` }}>
+  <ItemQuery id={id}>
     {({ loading, error, data }) => {
       if (error) {
         return `Boom! ${error.message}`;
