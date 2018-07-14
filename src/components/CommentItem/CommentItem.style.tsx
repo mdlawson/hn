@@ -8,9 +8,14 @@ export const Header = styled.div`
   margin-bottom: 3px;
 `;
 
-export const Content = styled.div`
-  font-size: 9pt;
-`;
+export const Content = styled.div<{ collapsed?: boolean }>(
+  {
+    fontSize: "9pt",
+  },
+  props => ({
+    display: props.collapsed ? "none" : "block",
+  }),
+);
 
 export const ReplyList = styled.ul`
   list-style: none;
@@ -21,4 +26,17 @@ export const ReplyList = styled.ul`
 export const ListItem = styled.li`
   margin: 10px 0;
   padding: 0;
+`;
+
+export const Collapse = styled.span`
+  user-select: none;
+  cursor: pointer;
+
+  &::before {
+    content: "[";
+  }
+
+  &::after {
+    content: "]";
+  }
 `;

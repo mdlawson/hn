@@ -1,8 +1,8 @@
-import React, { Component, SFC } from "react";
+import React, { SFC, PureComponent } from "react";
 import Interweave, { TransformCallback } from "interweave";
 
 import Item, { ItemData, ItemToggleCollapsedMutation } from "components/Item";
-import { Header, Content, ReplyList, ListItem } from "./CommentItem.style";
+import { Header, Content, ReplyList, ListItem, Collapse } from "./CommentItem.style";
 import Author from "components/Author";
 import Time from "components/Time";
 import { External } from "App.style";
@@ -11,7 +11,7 @@ export interface Props extends ItemData {
   onToggleCollapsed: () => void;
 }
 
-export class CommentItem extends Component<Props> {
+export class CommentItem extends PureComponent<Props> {
   render() {
     const {
       text,
@@ -32,22 +32,18 @@ export class CommentItem extends Component<Props> {
       <div>
         <Header>
           <Author id={by} /> <Time since={time} />{" "}
-          <span onClick={onToggleCollapsed}>{collapsed ? `[+]` : `[-]`}</span>
+          <Collapse onClick={onToggleCollapsed}>{collapsed ? "+" : "-"}</Collapse>
         </Header>
-        {collapsed ? (
-          undefined
-        ) : (
-          <Content>
-            <Interweave transform={this.transform} content={text} />
-            <ReplyList>
-              {(kids || []).map(id => (
-                <ListItem key={id}>
-                  <CommentItemContainer id={id} />
-                </ListItem>
-              ))}
-            </ReplyList>
-          </Content>
-        )}
+        <Content collapsed={collapsed}>
+          <Interweave transform={this.transform} content={text} />
+          <ReplyList>
+            {(kids || []).map(id => (
+              <ListItem key={id}>
+                <CommentItemContainer id={id} />
+              </ListItem>
+            ))}
+          </ReplyList>
+        </Content>
       </div>
     );
   }
