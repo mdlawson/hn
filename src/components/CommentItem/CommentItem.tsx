@@ -6,6 +6,7 @@ import { Header, Content, ReplyList, ListItem, Collapse } from "./CommentItem.st
 import Author from "components/Author";
 import Time from "components/Time";
 import { External } from "App.style";
+import Skeleton from "../Skeleton";
 
 export interface Props extends ItemData {
   onToggleCollapsed: () => void;
@@ -57,14 +58,30 @@ export class CommentItem extends PureComponent<Props> {
   };
 }
 
+export const SkeletonCommentItem = () => (
+  <div>
+    <Header>
+      <Skeleton characters={15} variance={0.05} />
+    </Header>
+    <Content>
+      <Skeleton characters={50} lines={3} />
+    </Content>
+  </div>
+);
+
 const CommentItemContainer: SFC<{ id: number }> = ({ id }) => (
-  <Item id={id}>
-    {data => (
-      <ItemToggleCollapsedMutation id={id}>
-        {toggle => <CommentItem onToggleCollapsed={toggle} {...data} />}
-      </ItemToggleCollapsedMutation>
+  <ItemToggleCollapsedMutation id={id}>
+    {toggle => (
+      <Item id={id}>
+        {({ data, error }) => {
+          if (data && data.item) {
+            return <CommentItem {...data.item} onToggleCollapsed={toggle} />;
+          }
+          return error ? "Boom!" : <SkeletonCommentItem />;
+        }}
+      </Item>
     )}
-  </Item>
+  </ItemToggleCollapsedMutation>
 );
 
 export default CommentItemContainer;

@@ -5,40 +5,36 @@ import { createQuery, createMutation, Resolver } from "apollo/utils";
 
 type ItemIdObject = { id: number };
 
-const ITEM = gql`
-  query ItemFromRef($ref: String!) {
-    item @rtdbQuery(ref: $ref, type: "Item") {
-      id @key
-      deleted
-      type
-      by
-      time
-      text
-      dead
-      parent
-      kids @array
-      url
-      score
-      title
-      descendants
-      collapsed @client
+export const ItemQuery = createQuery<{ item?: ItemData }, { ref: string }, ItemIdObject>(
+  gql`
+    query ItemFromRef($ref: String!) {
+      item @rtdbQuery(ref: $ref, type: "Item") {
+        id @key
+        deleted
+        type
+        by
+        time
+        text
+        dead
+        parent
+        kids @array
+        url
+        score
+        title
+        descendants
+        collapsed @client
+      }
     }
-  }
-`;
-
-export const TOGGLE_COLLAPSED = gql`
-  mutation ToggleItemCollapsed($id: Int!) {
-    toggleItemCollapsed(id: $id) @client
-  }
-`;
-
-export const ItemQuery = createQuery<{ item: ItemData }, { ref: string }, ItemIdObject>(
-  ITEM,
+  `,
   ({ id }) => ({ ref: `/v0/item/${id}` }),
 );
 
 export const ItemToggleCollapsedMutation = createMutation<void, ItemIdObject>(
-  TOGGLE_COLLAPSED,
+  gql`
+    mutation ToggleItemCollapsed($id: Int!) {
+      toggleItemCollapsed(id: $id) @client
+    }
+  `,
 );
 
 const toggleItemCollapsed: Resolver<void, ItemIdObject> = (

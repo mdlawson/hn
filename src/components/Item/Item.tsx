@@ -1,5 +1,3 @@
-import React, { SFC, ReactNode } from "react";
-
 import { ItemQuery } from "./Item.data";
 
 export interface ItemData {
@@ -19,23 +17,4 @@ export interface ItemData {
   collapsed: boolean;
 }
 
-interface Props {
-  id: number;
-  children: (data: ItemData) => ReactNode;
-}
-
-const ItemContainer: SFC<Props> = ({ id, children }) => (
-  <ItemQuery id={id}>
-    {({ loading, error, data }) => {
-      if (error) {
-        return `Boom! ${error.message}`;
-      }
-      if (loading || !data) {
-        return "Loading...";
-      }
-      return children(data.item);
-    }}
-  </ItemQuery>
-);
-
-export default ItemContainer;
+export default ItemQuery;

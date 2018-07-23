@@ -5,7 +5,7 @@ import { StoriesQuery, STORIES } from "./StoryList.data";
 import { List, ListItem } from "./StoryList.style";
 
 export interface Props {
-  items: number[];
+  items: Array<number | undefined>;
 }
 
 export class StoryList extends React.Component<Props> {
@@ -13,8 +13,8 @@ export class StoryList extends React.Component<Props> {
     const { items } = this.props;
     return (
       <List>
-        {items.map(item => (
-          <ListItem key={item}>
+        {items.map((item, index) => (
+          <ListItem key={item || index}>
             <StoryItem id={item} />
           </ListItem>
         ))}
@@ -25,14 +25,16 @@ export class StoryList extends React.Component<Props> {
 
 const StoryListContainer: SFC = () => (
   <StoriesQuery>
-    {({ loading, error, data }) => {
+    {({ error, data }) => {
       if (error) {
         return `Boom! ${error.message}`;
       }
-      if (loading || !data) {
-        return "Loading...";
-      }
-      return <StoryList items={data.stories.map(story => story.id)} />;
+      const items =
+        data && data.stories
+          ? data.stories.map(story => story.id)
+          : Array(30).fill(undefined);
+
+      return <StoryList items={items} />;
     }}
   </StoriesQuery>
 );

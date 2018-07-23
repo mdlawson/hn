@@ -5,6 +5,7 @@ import { Site, Subtext, Title } from "./StoryItem.style";
 import Item, { ItemData } from "components/Item";
 import Author from "components/Author";
 import Time from "components/Time";
+import Skeleton from "components/Skeleton";
 
 const HN = "https://news.ycombinator.com";
 const ALGOLIA = "https://hn.algolia.com/?sort=byDate&storyText=false";
@@ -17,6 +18,7 @@ export interface Props extends ItemData {}
 export class StoryItem extends Component<Props> {
   render() {
     const { title, by, id, score, url, time } = this.props;
+
     return (
       <div>
         <Title>
@@ -66,8 +68,32 @@ export class StoryItem extends Component<Props> {
   }
 }
 
-const StoryItemContainer: SFC<{ id: number }> = ({ id }) => (
-  <Item id={id}>{data => <StoryItem {...data} />}</Item>
+export const SkeletonStoryItem = () => (
+  <div>
+    <Title>
+      <Skeleton characters={30} />
+      <Site>
+        <Skeleton characters={10} />
+      </Site>
+    </Title>
+    <Subtext>
+      <Skeleton characters={30} variance={0.05} />
+    </Subtext>
+  </div>
 );
+
+const StoryItemContainer: SFC<{ id?: number }> = ({ id }) =>
+  id ? (
+    <Item id={id}>
+      {({ error, data }) => {
+        if (data && data.item) {
+          return <StoryItem {...data.item} />;
+        }
+        return error ? "Boom!" : <SkeletonStoryItem />;
+      }}
+    </Item>
+  ) : (
+    <SkeletonStoryItem />
+  );
 
 export default StoryItemContainer;
