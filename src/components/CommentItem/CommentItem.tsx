@@ -1,12 +1,11 @@
 import React, { SFC, PureComponent } from "react";
-import Interweave, { TransformCallback } from "interweave";
 
 import Item, { ItemData, ItemToggleCollapsedMutation } from "components/Item";
 import { Header, Content, ReplyList, ListItem, Collapse } from "./CommentItem.style";
 import Author from "components/Author";
 import Time from "components/Time";
-import { External } from "App.style";
-import Skeleton from "../Skeleton";
+import Skeleton from "components/Skeleton";
+import Markup from "../Markup";
 
 export interface Props extends ItemData {
   onToggleCollapsed: () => void;
@@ -36,7 +35,7 @@ export class CommentItem extends PureComponent<Props> {
           <Collapse onClick={onToggleCollapsed}>{collapsed ? "+" : "-"}</Collapse>
         </Header>
         <Content collapsed={collapsed}>
-          <Interweave transform={this.transform} content={text} />
+          <Markup html={text} />
           <ReplyList>
             {(kids || []).map(id => (
               <ListItem key={id}>
@@ -48,14 +47,6 @@ export class CommentItem extends PureComponent<Props> {
       </div>
     );
   }
-
-  transform: TransformCallback = (node, children) => {
-    if (node.tagName === "A") {
-      return (
-        <External href={node.getAttribute("href") || undefined}>{children}</External>
-      );
-    }
-  };
 }
 
 export const SkeletonCommentItem = () => (

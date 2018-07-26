@@ -5,6 +5,7 @@ import { hot } from "react-hot-loader";
 import { Container, Header, Icon, Title, Internal, Link } from "App.style";
 import StoryList from "components/StoryList";
 import StoryDetail from "components/StoryDetail";
+import UserDetail from "components/UserDetail";
 
 const HN = "https://news.ycombinator.com";
 
@@ -27,6 +28,7 @@ class App extends Component {
           </span>
         </Header>
         <Switch>
+          <Route path="/user/:id" component={UserDetail} />
           <Route path="/item/:id" component={StoryDetail} />
           <Route path="/" component={StoryList} />
         </Switch>

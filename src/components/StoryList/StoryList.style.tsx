@@ -21,7 +21,6 @@ export const ListItem = styled.li`
     content: counter(ListItem) ".";
     text-align: right;
     width: 30px;
-    font-size: 10pt;
     padding-right: 5px;
   }
 `;

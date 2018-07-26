@@ -1,7 +1,7 @@
 import React, { Component, SFC } from "react";
 
 import StoryItem from "components/StoryItem";
-import { StoriesQuery, STORIES } from "./StoryList.data";
+import { StoriesQuery } from "./StoryList.data";
 import { List, ListItem } from "./StoryList.style";
 
 export interface Props {

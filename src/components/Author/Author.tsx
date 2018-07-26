@@ -1,10 +1,6 @@
 import React, { SFC } from "react";
-import { Internal } from "App.style";
+import { Link } from "App.style";
 
-const HN = "https://news.ycombinator.com";
-
-const Author: SFC<{ id: string }> = ({ id }) => (
-  <Internal href={`${HN}/user?id=${id}`}>{id}</Internal>
-);
+const Author: SFC<{ id: string }> = ({ id }) => <Link to={`/user/${id}`}>{id}</Link>;
 
 export default Author;

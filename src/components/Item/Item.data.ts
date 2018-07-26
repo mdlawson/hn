@@ -3,11 +3,29 @@ import gql from "graphql-tag";
 import { ItemData } from ".";
 import { createQuery, createMutation, Resolver } from "apollo/utils";
 
-type ItemIdObject = { id: number };
+interface ItemKey {
+  id: number;
+}
 
-export const ItemQuery = createQuery<{ item?: ItemData }, { ref: string }, ItemIdObject>(
+export interface ItemData extends ItemKey {
+  deleted: boolean;
+  type: string;
+  by: string;
+  time: number;
+  text: string;
+  dead: boolean;
+  parent: number;
+  kids: number[];
+  url: string;
+  score: number;
+  title: string;
+  descendants: number;
+  collapsed: boolean;
+}
+
+export const ItemQuery = createQuery<{ item?: ItemData }, { ref: string }, ItemKey>(
   gql`
-    query ItemFromRef($ref: String!) {
+    query GetItem($ref: String!) {
       item @rtdbQuery(ref: $ref, type: "Item") {
         id @key
         deleted
@@ -29,7 +47,7 @@ export const ItemQuery = createQuery<{ item?: ItemData }, { ref: string }, ItemI
   ({ id }) => ({ ref: `/v0/item/${id}` }),
 );
 
-export const ItemToggleCollapsedMutation = createMutation<void, ItemIdObject>(
+export const ItemToggleCollapsedMutation = createMutation<void, ItemKey>(
   gql`
     mutation ToggleItemCollapsed($id: Int!) {
       toggleItemCollapsed(id: $id) @client
@@ -37,7 +55,7 @@ export const ItemToggleCollapsedMutation = createMutation<void, ItemIdObject>(
   `,
 );
 
-const toggleItemCollapsed: Resolver<void, ItemIdObject> = (
+const toggleItemCollapsed: Resolver<void, ItemKey> = (
   config,
   variables,
   { cache, getCacheKey },

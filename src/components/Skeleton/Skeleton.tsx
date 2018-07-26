@@ -14,8 +14,10 @@ export class Skeleton extends Component<Props> {
 
     return Array(lines)
       .fill(null)
-      .map(() => (
-        <SkeletonText>{"_".repeat(varyByPercentage(characters, variance))}</SkeletonText>
+      .map((val, i) => (
+        <SkeletonText key={i}>
+          {"_".repeat(varyByPercentage(characters, variance))}
+        </SkeletonText>
       ));
   }
 }

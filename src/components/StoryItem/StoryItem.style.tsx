@@ -13,6 +13,5 @@ export const Subtext = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: 10pt;
   padding-bottom: 2px;
 `;

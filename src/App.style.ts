@@ -12,11 +12,11 @@ export const Container = styled.div`
   background-color: ${BG};
   display: flex;
   flex-direction: column;
+  font-size: 10pt;
 `;
 
 export const Header = styled.div`
   background-color: ${ACCENT};
-  font-size: 10pt;
   line-height: 12pt;
   padding: 2px;
   display: flex;

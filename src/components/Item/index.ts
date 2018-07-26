@@ -1,4 +1,3 @@
-import Item from "./Item";
-export * from "./Item";
+import { ItemQuery } from "./Item.data";
 export * from "./Item.data";
-export default Item;
+export default ItemQuery;
