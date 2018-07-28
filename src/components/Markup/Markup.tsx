@@ -1,7 +1,7 @@
 import React, { SFC } from "react";
 import Interweave, { TransformCallback } from "interweave";
 
-import { External } from "App.style";
+import Link from "components/Link";
 
 const Markup: SFC<{ html: string }> = ({ html }) => (
   <Interweave tagName="fragment" disableLineBreaks transform={transform} content={html} />
@@ -9,7 +9,7 @@ const Markup: SFC<{ html: string }> = ({ html }) => (
 
 const transform: TransformCallback = (node, children) => {
   if (node.tagName === "A") {
-    return <External href={node.getAttribute("href") || undefined}>{children}</External>;
+    return <Link href={node.getAttribute("href") || undefined}>{children}</Link>;
   }
 };
 

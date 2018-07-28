@@ -1,6 +1,6 @@
-import styled, { css } from "react-emotion";
+import styled from "react-emotion";
 
-import { Link, subdued } from "App.style";
+import { subdued } from "App.style";
 
 export const Site = styled.span`
   ${subdued};

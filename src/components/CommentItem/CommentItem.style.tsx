@@ -1,6 +1,6 @@
-import styled, { css } from "react-emotion";
+import styled from "react-emotion";
 
-import { subdued, Internal } from "App.style";
+import { subdued } from "App.style";
 
 export const Header = styled.div`
   ${subdued};

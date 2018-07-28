@@ -1,11 +1,11 @@
 import React, { Component, SFC } from "react";
 
-import { Link, Internal } from "App.style";
 import { Site, Subtext, Title } from "./StoryItem.style";
 import Item, { ItemData } from "components/Item";
 import Author from "components/Author";
 import Time from "components/Time";
 import Skeleton from "components/Skeleton";
+import Link from "components/Link";
 
 const HN = "https://news.ycombinator.com";
 const ALGOLIA = "https://hn.algolia.com/?sort=byDate&storyText=false";
@@ -22,17 +22,17 @@ export class StoryItem extends Component<Props> {
     return (
       <div>
         <Title>
-          <Internal href={url}>{title} </Internal>
+          <Link.Plain href={url}>{title} </Link.Plain>
           {this.renderSite()}
         </Title>
         <Subtext>
           {score} points by <Author id={by} /> <Time since={time} />
           {" | "}
-          <Internal href={`${ALGOLIA}&query=${title}`}>past</Internal>
+          <Link.Minimal href={`${ALGOLIA}&query=${title}`}>past</Link.Minimal>
           {" | "}
-          <Internal href={`${GOOGLE}?q=${title}`}>web</Internal>
+          <Link.Minimal href={`${GOOGLE}?q=${title}`}>web</Link.Minimal>
           {" | "}
-          <Link to={`/item/${id}`}>{this.commentsLinkText()}</Link>
+          <Link.Minimal to={`/item/${id}`}>{this.commentsLinkText()}</Link.Minimal>
         </Subtext>
       </div>
     );
@@ -62,7 +62,7 @@ export class StoryItem extends Component<Props> {
 
     return (
       <Site>
-        (<Internal href={`${HN}/from?site=${site}`}>{site}</Internal>)
+        (<Link.Minimal href={`${HN}/from?site=${site}`}>{site}</Link.Minimal>)
       </Site>
     );
   }

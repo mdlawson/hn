@@ -5,7 +5,7 @@ import format from "date-fns/format";
 import { Detail, Label, Value } from "./UserDetail.style";
 import { UserQuery, UserData } from "./UserDetail.data";
 import Markup from "components/Markup";
-import { External } from "App.style";
+import Link from "components/Link";
 
 const HN = "https://news.ycombinator.com";
 
@@ -27,13 +27,13 @@ export class UserDetail extends Component<Props> {
           <Markup html={about} />
         </Value>
         <Value>
-          <External href={`${HN}/submitted?id=${id}`}>submissions</External>
+          <Link href={`${HN}/submitted?id=${id}`}>submissions</Link>
         </Value>
         <Value>
-          <External href={`${HN}/threads?id=${id}`}>comments</External>
+          <Link href={`${HN}/threads?id=${id}`}>comments</Link>
         </Value>
         <Value>
-          <External href={`${HN}/favorites?id=${id}`}>favorites</External>
+          <Link href={`${HN}/favorites?id=${id}`}>favorites</Link>
         </Value>
       </Detail>
     );

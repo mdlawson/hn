@@ -1,5 +1,4 @@
 import styled, { css } from "react-emotion";
-import { Link as RouterLink } from "react-router-dom";
 
 export const GREY = "#828282";
 export const BG = "#f6f6ef";
@@ -28,37 +27,11 @@ export const Icon = styled.img`
   margin-right: 5px;
 `;
 
-export const External = styled.a`
-  color: black;
-
-  &:visited {
-    color: ${GREY};
-  }
-`;
-
-export const Internal = styled(External)`
-  text-decoration: none;
-`;
-
-export const Link = Internal.withComponent(RouterLink);
-
 export const Title = styled.div`
   font-weight: bold;
   margin-right: 8px;
-
-  ${Link}:visited {
-    color: black;
-  }
 `;
 
 export const subdued = css`
   color: ${GREY};
-
-  ${Internal}, ${Link} {
-    color: ${GREY};
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 `;
