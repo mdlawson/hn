@@ -1,9 +1,18 @@
 import gql from "graphql-tag";
 import { createQuery } from "apollo/utils";
 
+export enum Stories {
+  TOP,
+  NEW,
+  SHOW,
+  ASK,
+  JOB,
+}
+
 export const StoriesQuery = createQuery<
   { stories: Array<{ id: number }> },
-  { ref: string }
+  { ref: string },
+  { show: Stories }
 >(
   gql`
     query ListStories($ref: String!) {
@@ -12,5 +21,5 @@ export const StoriesQuery = createQuery<
       }
     }
   `,
-  () => ({ ref: `/v0/topstories` }),
+  ({ show }) => ({ ref: `/v0/${Stories[show].toLowerCase()}stories` }),
 );

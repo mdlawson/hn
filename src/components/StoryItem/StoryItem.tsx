@@ -22,7 +22,7 @@ export class StoryItem extends Component<Props> {
     return (
       <div>
         <Title>
-          <Link.Plain href={url}>{title} </Link.Plain>
+          <Link.Plain href={url || "foo"}>{title} </Link.Plain>
           {this.renderSite()}
         </Title>
         <Subtext>

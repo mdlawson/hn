@@ -32,6 +32,10 @@ export const Title = styled.div`
   margin-right: 8px;
 `;
 
+export const active = css`
+  color: white;
+`;
+
 export const subdued = css`
   color: ${GREY};
 `;

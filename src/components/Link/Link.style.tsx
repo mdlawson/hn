@@ -1,7 +1,9 @@
-import styled from "react-emotion";
+import styled, { css } from "react-emotion";
 
 import { GREY } from "App.style";
-import Base from "./Link";
+import { Base, Nav as NavLink } from "./Link";
+
+export const active = css``;
 
 export const Default = styled(Base)`
   color: inherit;
@@ -32,4 +34,10 @@ export const Plain = styled(Base)`
   &:visited {
     color: inherit;
   }
+
+  &.${active} {
+    color: white;
+  }
 `;
+
+export const Nav = Plain.withComponent(NavLink);

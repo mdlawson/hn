@@ -1,14 +1,14 @@
 import React, { Component, SFC } from "react";
 
 import StoryItem from "components/StoryItem";
-import { StoriesQuery } from "./StoryList.data";
+import { StoriesQuery, Stories } from "./StoryList.data";
 import { List, ListItem } from "./StoryList.style";
 
 export interface Props {
   items: Array<number | undefined>;
 }
 
-export class StoryList extends React.Component<Props> {
+export class StoryList extends Component<Props> {
   render() {
     const { items } = this.props;
     return (
@@ -23,8 +23,8 @@ export class StoryList extends React.Component<Props> {
   }
 }
 
-const StoryListContainer: SFC = () => (
-  <StoriesQuery>
+const StoryListContainer: SFC<{ show: Stories }> = ({ show }) => (
+  <StoriesQuery show={show}>
     {({ error, data }) => {
       if (error) {
         return `Boom! ${error.message}`;

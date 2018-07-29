@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router";
 import { hot } from "react-hot-loader";
 
-import { Container, Header, Icon, Title } from "App.style";
-import StoryList from "components/StoryList";
+import { Container, Header, Icon, Title, active } from "App.style";
+import StoryList, { Stories } from "components/StoryList";
 import StoryDetail from "components/StoryDetail";
 import UserDetail from "components/UserDetail";
 import Link from "components/Link";
@@ -17,11 +17,11 @@ class App extends Component {
         <Header>
           <Icon src="https://news.ycombinator.com/y18.gif" />
           <Title>
-            <Link.Plain to={{ foo: 1 }}>Hacker News</Link.Plain>
+            <Link.Plain to="/">Hacker News</Link.Plain>
           </Title>
           <span>
-            <Link.Plain href={`${HN}/newest`}> new </Link.Plain>
-            |<Link.Plain href={`${HN}/newcomments}`}> comments </Link.Plain>
+            <Link.Nav to="/newest"> new </Link.Nav>
+            |<Link.Plain href={`${HN}/newcomments`}> comments </Link.Plain>
             |<Link.Plain href={`${HN}/show`}> show </Link.Plain>
             |<Link.Plain href={`${HN}/ask`}> ask </Link.Plain>
             |<Link.Plain href={`${HN}/jobs`}> jobs </Link.Plain>
@@ -31,7 +31,8 @@ class App extends Component {
         <Switch>
           <Route path="/user/:id" component={UserDetail} />
           <Route path="/item/:id" component={StoryDetail} />
-          <Route path="/" component={StoryList} />
+          <Route path="/newest" render={() => <StoryList show={Stories.NEW} />} />
+          <Route path="/" render={() => <StoryList show={Stories.TOP} />} />
         </Switch>
       </Container>
     );
