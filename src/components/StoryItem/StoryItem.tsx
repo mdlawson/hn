@@ -1,7 +1,7 @@
 import React, { Component, SFC } from "react";
 
 import { Site, Subtext, Title } from "./StoryItem.style";
-import Item, { ItemData } from "components/Item";
+import Item, { ItemData, ItemType } from "components/Item";
 import Author from "components/Author";
 import Time from "components/Time";
 import Skeleton from "components/Skeleton";
@@ -17,14 +17,22 @@ export interface Props extends ItemData {}
 
 export class StoryItem extends Component<Props> {
   render() {
-    const { title, by, id, score, url, time } = this.props;
+    const { title, by, id, score, time, type } = this.props;
+
+    if (type === ItemType.JOB) {
+      return (
+        <div>
+          {this.renderTitle()}
+          <Subtext>
+            <Time since={time} />
+          </Subtext>
+        </div>
+      );
+    }
 
     return (
       <div>
-        <Title>
-          <Link.Plain href={url || "foo"}>{title} </Link.Plain>
-          {this.renderSite()}
-        </Title>
+        {this.renderTitle()}
         <Subtext>
           {score} points by <Author id={by} /> <Time since={time} />
           {" | "}
@@ -50,8 +58,25 @@ export class StoryItem extends Component<Props> {
     }
   }
 
+  renderTitle() {
+    const { url, id, title } = this.props;
+    return (
+      <Title>
+        <Link.Plain href={url} to={`/item/${id}`}>
+          {title}{" "}
+        </Link.Plain>
+        {this.renderSite()}
+      </Title>
+    );
+  }
+
   renderSite() {
     const { url } = this.props;
+
+    if (!url) {
+      return;
+    }
+
     const match = SITE_REGEX.exec(url);
 
     if (!match) {

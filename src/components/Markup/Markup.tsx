@@ -3,7 +3,7 @@ import Interweave, { TransformCallback } from "interweave";
 
 import Link from "components/Link";
 
-const Markup: SFC<{ html: string }> = ({ html }) => (
+const Markup: SFC<{ html?: string }> = ({ html }) => (
   <Interweave tagName="fragment" disableLineBreaks transform={transform} content={html} />
 );
 

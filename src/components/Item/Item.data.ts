@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-import { ItemData } from ".";
+import { ItemType } from ".";
 import { createQuery, createMutation, Resolver } from "apollo/utils";
 
 interface ItemKey {
@@ -8,19 +8,19 @@ interface ItemKey {
 }
 
 export interface ItemData extends ItemKey {
-  deleted: boolean;
-  type: string;
+  deleted?: boolean;
+  type: ItemType;
   by: string;
   time: number;
-  text: string;
-  dead: boolean;
-  parent: number;
-  kids: number[];
-  url: string;
-  score: number;
-  title: string;
-  descendants: number;
-  collapsed: boolean;
+  text?: string;
+  dead?: boolean;
+  parent?: number;
+  kids?: number[];
+  url?: string;
+  score?: number;
+  title?: string;
+  descendants?: number;
+  collapsed?: boolean;
 }
 
 export const ItemQuery = createQuery<{ item?: ItemData }, { ref: string }, ItemKey>(

@@ -22,9 +22,9 @@ class App extends Component {
           <span>
             <Link.Nav to="/newest"> new </Link.Nav>
             |<Link.Plain href={`${HN}/newcomments`}> comments </Link.Plain>
-            |<Link.Plain href={`${HN}/show`}> show </Link.Plain>
-            |<Link.Plain href={`${HN}/ask`}> ask </Link.Plain>
-            |<Link.Plain href={`${HN}/jobs`}> jobs </Link.Plain>
+            |<Link.Nav to="/show"> show </Link.Nav>
+            |<Link.Nav to="/ask"> ask </Link.Nav>
+            |<Link.Nav to="/jobs"> jobs </Link.Nav>
             |<Link.Plain href={`${HN}/submit`}> submit </Link.Plain>
           </span>
         </Header>
@@ -32,6 +32,9 @@ class App extends Component {
           <Route path="/user/:id" component={UserDetail} />
           <Route path="/item/:id" component={StoryDetail} />
           <Route path="/newest" render={() => <StoryList show={Stories.NEW} />} />
+          <Route path="/show" render={() => <StoryList show={Stories.SHOW} />} />
+          <Route path="/ask" render={() => <StoryList show={Stories.ASK} />} />
+          <Route path="/jobs" render={() => <StoryList show={Stories.JOB} />} />
           <Route path="/" render={() => <StoryList show={Stories.TOP} />} />
         </Switch>
       </Container>

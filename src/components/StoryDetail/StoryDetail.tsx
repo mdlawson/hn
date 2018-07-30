@@ -5,23 +5,38 @@ import Item, { ItemData } from "components/Item";
 import { StoryItem, SkeletonStoryItem } from "components/StoryItem";
 import { Detail, CommentList, ListItem } from "./StoryDetail.style";
 import CommentItem from "components/CommentItem";
+import Markup from "components/Markup";
 
 export interface Props extends ItemData {}
 
 export class StoryDetail extends Component<Props> {
   render() {
-    const { kids } = this.props;
+    const { text } = this.props;
     return (
       <Detail>
         <StoryItem {...this.props} />
-        <CommentList>
-          {kids.map(id => (
-            <ListItem key={id}>
-              <CommentItem id={id} />
-            </ListItem>
-          ))}
-        </CommentList>
+        <div>
+          <Markup html={text} />
+        </div>
+        {this.renderComments()}
       </Detail>
+    );
+  }
+
+  renderComments() {
+    const { kids } = this.props;
+    if (!kids) {
+      return;
+    }
+
+    return (
+      <CommentList>
+        {kids.map(id => (
+          <ListItem key={id}>
+            <CommentItem id={id} />
+          </ListItem>
+        ))}
+      </CommentList>
     );
   }
 }
