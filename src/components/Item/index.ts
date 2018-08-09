@@ -1,6 +1,9 @@
-import { ItemQuery } from "./Item.data";
+import Item from "./Item";
 export * from "./Item.data";
-export default ItemQuery;
+export * from "./Item";
+
+export default Item;
+
 export enum ItemType {
   STORY = "story",
   JOB = "job",

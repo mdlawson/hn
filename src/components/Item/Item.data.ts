@@ -55,6 +55,14 @@ export const ItemToggleCollapsedMutation = createMutation<void, ItemKey>(
   `,
 );
 
+export const ItemViewedMutation = createMutation<void, ItemKey>(
+  gql`
+    mutation MarkItemViewed($id: Int!) {
+      markItemViewed(id: $id) @client
+    }
+  `,
+);
+
 const toggleItemCollapsed: Resolver<void, ItemKey> = (
   config,
   variables,
@@ -74,11 +82,22 @@ const toggleItemCollapsed: Resolver<void, ItemKey> = (
   return null;
 };
 
+const markItemViewed: Resolver<void, ItemKey> = (
+  config,
+  variables,
+  { cache, getCacheKey },
+) => {
+  const id = getCacheKey({ __typename: "Item", id: variables.id });
+  cache.writeData({ id, data: { viewed: true } });
+};
+
 export const resolvers = {
   Item: {
     collapsed: () => false,
+    viewed: () => false,
   },
   Mutation: {
     toggleItemCollapsed,
+    markItemViewed,
   },
 };
