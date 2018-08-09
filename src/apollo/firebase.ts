@@ -1,4 +1,6 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/database";
+
 import { createRtdbLink } from "apollo-link-firebase";
 
 if (firebase.apps.length === 0) {

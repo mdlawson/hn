@@ -6,6 +6,7 @@
     "lib": ["dom", "es2017", "dom.iterable", "esnext.asynciterable"],
     "jsx": "react",
     "strict": true,
+    "importHelpers": true,
     "experimentalDecorators": true,
     "noEmit": true,
     "allowSyntheticDefaultImports": true
